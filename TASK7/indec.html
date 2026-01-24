@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodee Chatbot</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <button class="chatbot-toggler">
+        <span class="material-symbols-outlined">mode_comment</span>
+        <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <div class="decoration-elements">
+        <div class="deco-circle deco-1"></div>
+        <div class="deco-circle deco-2"></div>
+        <div class="deco-star deco-3">✨</div>
+        <div class="deco-star deco-4">⭐</div>
+    </div>
+
+    <div class="chatbot">
+        <header>
+            <div class="header-info">
+                <span class="material-symbols-outlined logo-icon">auto_awesome</span>
+                <h2>Kodee</h2>
+            </div>
+            <div class="header-controls">
+                <span class="material-symbols-outlined">refresh</span>
+                <span class="material-symbols-outlined">open_in_full</span>
+                <span class="material-symbols-outlined close-btn">close</span>
+            </div>
+        </header>
+
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                <div class="message-content">
+                    <p>Hello 👋<br>How can I help you today?</p>
+                    
+                    <div class="suggestions">
+                        <button class="suggestion-chip">I need help choosing the right hosting plan</button>
+                        <button class="suggestion-chip">I want to migrate to Hostinger</button>
+                        <button class="suggestion-chip">I want to create a website</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div class="chat-input">
+            <textarea placeholder="Ask Kodee anything..." required></textarea>
+            <button id="send-btn" class="material-symbols-outlined">send</button>
+            <div class="disclaimer">Kodee can make mistakes. Double-check replies.</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
