@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Navbar Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #171a20;
+            height: 200vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 32px;
+            height: 56px;
+            background-color: white;
+            z-index: 100;
+        }
+
+        .logo {
+            flex: 1;
+        }
+        .logo svg {
+            width: 120px;
+            display: block;
+            cursor: pointer;
+        }
+
+        .nav-center {
+            display: flex;
+            list-style: none;
+            gap: 4px;
+        }
+
+        .nav-item {
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-item a {
+            text-decoration: none;
+            color: #171a20;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            padding: 8px 16px;
+            display: block;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #f2f2f2;
+        }
+
+        .nav-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+        }
+        
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .mega-menu-container {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s;
+            z-index: 99;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .mega-menu-container.visible {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .menu-section {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 40px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .menu-section.active {
+            display: grid;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 80%;
+        }
+
+        .sidebar-links {
+            width: 20%;
+            border-left: 1px solid #e2e2e2;
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .grid-vehicles { grid-template-columns: 1fr 1fr 1fr 200px; }
+        .grid-energy { grid-template-columns: 1fr 1fr 200px; }
+        .grid-charging { grid-template-columns: 1fr 1fr 1fr 200px; }
+
+        .grid-discover {
+            grid-template-columns: 1fr 1fr 1fr;
+            width: 60%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .grid-discover h3 {
+            color: #5c5e62;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .grid-discover ul { list-style: none; }
+        .grid-discover li { margin-bottom: 12px; }
+        .grid-discover a { font-weight: 600; font-size: 15px; }
+
+        .card {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .card img {
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #171a20;
+            margin-bottom: 8px;
+        }
+
+        .card-links a {
+            font-size: 12px;
+            color: #5c5e62;
+            text-decoration: underline;
+            margin: 0 5px;
+            transition: color 0.2s;
+        }
+        .card-links a:hover { color: #171a20; }
+
+        .sidebar-links a {
+            text-decoration: none;
+            color: #171a20;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .sidebar-links a:hover { text-decoration: underline; }
+
+        #backdrop {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+        }
+        #backdrop.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .d-flex { display: flex; }
+        .flex-center { justify-content: center; }
+    </style>
+</head>
+<body>
+    <div id="backdrop"></div>
+    <header class="header" id="main-header">
+        <div class="logo">
+            <svg viewBox="0 0 342 35" xmlns="http://www.w3.org/2000/svg"><path d="M0 .1a9.7 9.7 0 007 7h11l.5.1v27.6h6.8V7.3L26 7h11a9.8 9.8 0 007-7H0zm238.6 0h-6.8v34.8H263a9.7 9.7 0 006-6.8h-30.3V0zm-52.3 6.8c3.6-1 6.6-3.8 7.4-6.9l-38.1.1v20.6h31.1v7.2h-24.4a13.6 13.6 0 00-8.7 7h39.9v-21h-31.2v-7h24zm116.2 28h6.7v-14h24.6v14h6.7v-21h-38zM85.3 7h26a9.6 9.6 0 007.1-7H78.3a9.6 9.6 0 007 7zm0 13.8h26a9.6 9.6 0 007.1-7H78.3a9.6 9.6 0 007 7zm0 14.1h26a9.6 9.6 0 007.1-7H78.3a9.6 9.6 0 007 7zM308.5 7h26a9.6 9.6 0 007-7h-40a9.6 9.6 0 007 7z" fill="currentColor"></path></svg>
+        </div>
+        <ul class="nav-center">
+            <li class="nav-item" data-target="vehicles"><a href="#"> Vehicles </a></li>
+            <li class="nav-item" data-target="energy"><a href="#"> Energy </a></li>
+            <li class="nav-item" data-target="charging"><a href="#"> Charging </a></li>
+            <li class="nav-item" data-target="discover"><a href="#"> Discover </a></li>
+        </ul>
+        <div class="nav-right">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+    </header>
+    <div class="mega-menu-container" id="mega-menu">
+        <div class="menu-section d-flex flex-center" id="vehicles">
+            <div style="display: flex; gap: 40px;">
+                <div class="card">
+                    <img src="https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Mega-Menu-Vehicles-Model-Y.png" alt="Model Y">
+                    <h3>Model Y</h3>
+                    <div class="card-links">
+                        <a href="#">Learn</a>
+                        <a href="#">Order</a>
+                    </div>
+                </div>
+                <div class="sidebar-links" style="border:none; padding-left: 0;">
+                    <a href="#">Test Drive</a>
+                    <a href="#">We, Robot</a>
+                    <a href="#">Vehicle Safety Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="menu-section d-flex flex-center" id="energy">
+            <div style="display: flex; gap: 60px;">
+                <div class="card">
+                    <img src="https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Mega-Menu-Energy-Powerwall-US.png" alt="Powerwall">
+                    <h3>Powerwall</h3>
+                    <div class="card-links"><a href="#">Learn</a></div>
+                </div>
+                <div class="card">
+                    <img src="https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Mega-Menu-Energy-Megapack.png" alt="Megapack">
+                    <h3>Megapack</h3>
+                    <div class="card-links"><a href="#">Learn</a></div>
+                </div>
+                <div class="sidebar-links">
+                    <a href="#">Utilities</a>
+                    <a href="#">Commercial</a>
+                </div>
+            </div>
+        </div>
+        <div class="menu-section d-flex flex-center" id="charging">
+            <div style="display: flex; gap: 40px;">
+                <div class="card">
+                    <img src="https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Mega-Menu-Charging-Charging.png" alt="Charging">
+                    <h3>Charging</h3>
+                    <div class="card-links"><a href="#">Learn</a></div>
+                </div>
+                <div class="card">
+                    <img src="https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Mega-Menu-Charging-Home-Charging.png" alt="Home Charging">
+                    <h3>Home Charging</h3>
+                    <div class="card-links"><a href="#">Learn</a></div>
+                </div>
+                <div class="card">
+                    <img src="https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Mega-Menu-Charging-Supercharging-NA.png" alt="Supercharging">
+                    <h3>Supercharging</h3>
+                    <div class="card-links"><a href="#">Learn</a></div>
+                </div>
+                <div class="sidebar-links">
+                    <a href="#">Host a Supercharger</a>
+                    <a href="#">Host Wall Connectors</a>
+                </div>
+            </div>
+        </div>
+        <div class="menu-section" id="discover">
+            <div class="grid-discover">
+                <div>
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Test Drive</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Video Guides</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Location Services</h3>
+                    <ul>
+                        <li><a href="#">Find Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        const megaMenu = document.getElementById('mega-menu');
+        const sections = document.querySelectorAll('.menu-section');
+        const header = document.getElementById('main-header');
+        const backdrop = document.getElementById('backdrop');
+        let hideTimeout;
+        function showMenu(targetId) {
+            clearTimeout(hideTimeout);
+            megaMenu.classList.add('visible');
+            backdrop.classList.add('active');
+            sections.forEach(section => section.classList.remove('active'));
+            const targetSection = document.getElementById(targetId);
+            if(targetSection) {
+                targetSection.classList.add('active');
+            }
+        }
+        function hideMenu() {
+            hideTimeout = setTimeout(() => {
+                megaMenu.classList.remove('visible');
+                backdrop.classList.remove('active');
+                sections.forEach(section => section.classList.remove('active'));
+            }, 100); 
+        }
+        navItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const target = item.getAttribute('data-target');
+                showMenu(target);
+            });
+            item.addEventListener('mouseleave', () => {
+                 hideMenu();
+            });
+        });
+        megaMenu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+        });
+        megaMenu.addEventListener('mouseleave', () => {
+            hideMenu();
+        });
+    </script>
+</body>
+</html>
