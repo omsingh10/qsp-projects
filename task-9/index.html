@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Method Checkout</title>
+    <style>
+        /* --- General Reset & Typography --- */
+        * {
+            box-sizing: border-box;
+            font-family: "Arial", sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4; /* Light grey background for contrast */
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* --- Main Container (Responsive Card) --- */
+        .payment-container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 700px; /* Tablet/Desktop constraint */
+            padding: 24px;
+            border: 1px solid #d5d9d9;
+            border-radius: 8px;
+        }
+
+        /* --- Headings --- */
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .sub-header {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* --- Promo Code Section --- */
+        .promo-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .input-field {
+            flex-grow: 1;
+            padding: 8px 10px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            font-size: 14px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
+        }
+
+        .btn-small {
+            background-color: #e7e9ec;
+            border: 1px solid #888;
+            padding: 8px 14px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 13px;
+            background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+        }
+        
+        .btn-small.apply {
+            background-color: #fff; /* Fallback */
+            border-color: #adb1b8 #a2a6ac #8d9096;
+            border-style: solid;
+            border-width: 1px;
+            cursor: pointer;
+            display: inline-block;
+            padding: 0;
+            text-align: center;
+            text-decoration: none!important;
+            vertical-align: middle;
+            background: #e3aa4a; /* Yellowish fallback */
+        }
+        
+        /* Specific Amazon-like yellow button styling for Apply */
+        .apply-btn {
+            background: #F7CA00;
+            border: 1px solid #FCD200;
+            box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+            border-radius: 8px;
+            padding: 0 15px;
+            cursor: pointer;
+            font-size: 13px;
+            line-height: 29px;
+            height: 31px;
+        }
+        .apply-btn:hover { background: #F2C200; }
+
+        /* --- Payment Options List --- */
+        .payment-option {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        /* Highlight selected option */
+        .payment-option.selected {
+            background-color: #fcf5ee;
+            border: 1px solid #e77600;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="radio"] {
+            margin-top: 4px;
+            margin-right: 10px;
+            accent-color: #e77600; /* Amazon Orange for radio select */
+            transform: scale(1.2);
+        }
+
+        .option-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .option-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: #111;
+        }
+
+        .option-subtitle {
+            font-size: 13px;
+            color: #565959;
+            margin-top: 2px;
+        }
+
+        /* --- Card Icons --- */
+        .card-icons {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .card-icon {
+            font-weight: bold;
+            font-style: italic;
+            color: #002f86; /* Visa blue roughly */
+            font-size: 18px;
+        }
+        .mastercard { color: #eb001b; }
+        .rupay { color: #f37021; font-style: normal; }
+
+        /* --- Dropdown Styling --- */
+        .bank-select {
+            margin-top: 8px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #888;
+            background: #f0f2f2;
+            box-shadow: 0 1px 0 rgba(255,255,255,.5) inset;
+            font-size: 13px;
+        }
+
+        /* --- Disabled State --- */
+        .disabled-option {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .disabled-option input {
+            cursor: not-allowed;
+        }
+        .unavailable-text {
+            color: #d00;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        /* --- Main Action Button --- */
+        .submit-btn {
+            width: 100%;
+            background-color: #FFD814;
+            border: 1px solid #FCD200;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #F7CA00;
+        }
+
+        /* --- Divider --- */
+        .divider {
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+
+        /* --- Responsive Tweaks --- */
+        @media (max-width: 480px) {
+            .payment-container {
+                padding: 15px;
+                border: none; /* Full width on mobile often drops borders */
+            }
+            .promo-section {
+                flex-direction: column;
+            }
+            .apply-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <h1>Payment method</h1>
+
+        <div>
+            <span class="sub-header">Your available balance</span>
+            <div class="promo-section">
+                <input type="text" class="input-field" placeholder="Enter Code">
+                <button class="apply-btn">Apply</button>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>UPI</h2>
+        
+        <div class="payment-option" id="opt-upi">
+            <label class="radio-label">
+                <input type="radio" name="payment_method" value="amazon_upi" onclick="selectOption('opt-upi')">
+                <div class="option-content">
+                    <span class="option-title">Amazon Pay UPI</span>
+                    <span class="option-subtitle">Bank of India •••• 8847</span>
+                </div>
+            </label>
+        </div>
+
+        <h2>Another payment method</h2>
+
+        <div class="payment-option" id="opt-card">
+            <label class="radio-label">
+                <input type="radio" name="payment_method" value="card" onclick="selectOption('opt-card')">
+                <div class="option-content">
+                    <span class="option-title">Credit or debit card</span>
+                    <div class="card-icons">
+                        <span class="card-icon">VISA</span>
+                        <span class="card-icon mastercard">MasterCard</span>
+                        <span class="card-icon rupay">RuPay</span>
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        <div class="payment-option" id="opt-netbanking">
+            <label class="radio-label">
+                <input type="radio" name="payment_method" value="net_banking" onclick="selectOption('opt-netbanking')">
+                <div class="option-content">
+                    <span class="option-title">Net Banking</span>
+                    <select class="bank-select" onclick="selectOption('opt-netbanking', true)">
+                        <option>Choose an Option</option>
+                        <option>HDFC Bank</option>
+                        <option>SBI</option>
+                        <option>ICICI Bank</option>
+                        <option>Axis Bank</option>
+                    </select>
+                </div>
+            </label>
+        </div>
+
+        <div class="payment-option" id="opt-scan">
+            <label class="radio-label">
+                <input type="radio" name="payment_method" value="scan_upi" onclick="selectOption('opt-scan')">
+                <div class="option-content">
+                    <span class="option-title">Scan and Pay with UPI</span>
+                    <span class="option-subtitle">Scan the QR code on the payment page</span>
+                </div>
+            </label>
+        </div>
+
+        <div class="payment-option" id="opt-other-upi">
+            <label class="radio-label">
+                <input type="radio" name="payment_method" value="other_upi" onclick="selectOption('opt-other-upi')">
+                <div class="option-content">
+                    <span class="option-title">Other UPI Apps</span>
+                </div>
+            </label>
+        </div>
+
+        <div class="payment-option disabled-option">
+            <label class="radio-label">
+                <input type="radio" name="payment_method" value="cod" disabled>
+                <div class="option-content">
+                    <span class="option-title" style="color: #999;">Cash on Delivery / Pay on Delivery</span>
+                    <span class="unavailable-text">Unavailable for this payment</span>
+                </div>
+            </label>
+        </div>
+
+        <button class="submit-btn" id="submitBtn">Use this payment method</button>
+
+    </div>
+
+    <script>
+        // Function to handle highlighting selected options
+        function selectOption(id, isDropdown = false) {
+            // Remove 'selected' class from all options
+            const options = document.querySelectorAll('.payment-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked option
+            const selectedElement = document.getElementById(id);
+            if(selectedElement) {
+                selectedElement.classList.add('selected');
+            }
+
+            // If user clicks the dropdown directly, ensure the radio is checked
+            if (isDropdown) {
+                const radio = selectedElement.querySelector('input[type="radio"]');
+                if(radio) radio.checked = true;
+            }
+        }
+
+        // Add event listener to the submit button
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const selected = document.querySelector('input[name="payment_method"]:checked');
+            
+            if (selected) {
+                alert('Payment method selected: ' + selected.value + '. Proceeding to checkout...');
+            } else {
+                alert('Please select a payment method first.');
+            }
+        });
+    </script>
+</body>
+</html>
