@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Navbar Recreation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #213d77;
+            --primary-orange: #fb792b;
+            --secondary-blue: #0b2c6b;
+            --active-red: #d32f2f;
+            --active-orange: #ff9800;
+            --text-dark: #333;
+            --text-gray: #555;
+            --text-light: #666;
+            --bg-white: #ffffff;
+            --bg-light: #f5f7fa;
+            --banner-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Main Navbar Container */
+        .navbar-container {
+            background-color: var(--bg-white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            white-space: nowrap; /* Prevent wrapping for desktop look */
+        }
+
+        /* Left Side: Indian Railways Logo */
+        .logo-left img {
+            height: 60px;
+            width: auto;
+            display: block;
+        }
+
+        /* Center Section: Contains Top Bar & Main Menu */
+        .nav-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        /* --- Top Bar (Date, Font Controls, Language) --- */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Centered as per image */
+            gap: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 8px;
+        }
+
+        .top-bar span, .top-bar a {
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+
+        .divider {
+            color: #ccc;
+        }
+
+        /* --- Bottom Bar (Navigation Links) --- */
+        .bottom-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 13px;
+        }
+
+        /* Home Icon */
+        .home-icon {
+            color: var(--text-gray);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .home-icon:hover { color: var(--primary-blue); }
+
+        /* Login Button */
+        .btn-login {
+            background-color: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 13px;
+            border-radius: 2px; /* Sharp corners like image */
+            transition: background 0.3s;
+        }
+        .btn-login:hover {
+            background-color: #1a3060;
+        }
+
+        /* Navigation Links */
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding-bottom: 3px;
+            text-transform: uppercase;
+            font-size: 12px;
+            border-bottom: 3px solid transparent; /* Invisible border for spacing */
+            transition: border-color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Specific Active States from Image */
+        .nav-link.active-red {
+            border-bottom-color: var(--active-red);
+        }
+        
+        .nav-link.active-orange {
+            border-bottom-color: var(--active-orange);
+        }
+
+        /* Right Side: IRCTC Logo */
+        .logo-right img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        /* Responsive Handling (Simple scroll for smaller screens to maintain layout) */
+        @media (max-width: 1024px) {
+            .navbar-container {
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+            .nav-center {
+                align-items: flex-start;
+            }
+        }
+
+        /* Main Content Container */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 40px 20px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Login Card Styles */
+        .login-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px;
+            border-top: 5px solid var(--primary-blue);
+            position: relative;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-header h2 {
+            color: var(--text-dark);
+            text-transform: uppercase;
+            font-weight: 700;
+            border-bottom: 2px solid #ddd;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 61, 119, 0.1);
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 5px;
+            color: #999;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: 0;
+            font-size: 0.75rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+        }
+
+        .extra-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-container input {
+            accent-color: var(--primary-blue);
+            width: 16px;
+            height: 16px;
+        }
+
+        .forgot-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            background-color: #e06015;
+            transform: translateY(-2px);
+        }
+
+        .login-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .btn-secondary {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* Banner Section (Right Side) */
+        .banner-card {
+            background: var(--banner-gradient);
+            width: 100%;
+            max-width: 600px;
+            height: 400px; /* Fixed height for consistency */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Creative Elements for Banner */
+        .banner-content {
+            z-index: 2;
+        }
+
+        .banner-icon-container {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            background: rgba(255,255,255,0.2);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .banner-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .banner-subtitle {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-list i {
+            color: var(--primary-orange);
+        }
+
+        /* Decorative circles in bg */
+        .circle-decor {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        .c1 { width: 200px; height: 200px; top: -50px; right: -50px; }
+        .c2 { width: 100px; height: 100px; bottom: 20px; left: 20px; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .banner-card {
+                height: auto;
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar-container">
+        <div class="logo-left">
+            <img src="https://www.irctc.co.in/nget/assets/images/secondry-logo.png" alt="Indian Railways">
+        </div>
+
+        <div class="nav-center">
+            
+            <div class="top-bar">
+                <span id="current-date">31-Jan-2026 [15:10:33]</span>
+                <span class="divider">|</span>
+                <a>A-</a>
+                <span class="divider">|</span>
+                <a>A</a>
+                <span class="divider">|</span>
+                <a>A+</a>
+                <span class="divider">|</span>
+                <a style="color: #333;">हिंदी</a>
+            </div>
+
+            <div class="bottom-bar">
+                <a href="#" class="home-icon"><i class="fa-solid fa-house"></i></a>
+                
+                <a href="#" class="btn-login">LOGIN / REGISTER</a>
+                
+                <a href="#" class="nav-link active-red">TRAINS</a>
+                <a href="#" class="nav-link active-orange">E-WALLET</a>
+                <a href="#" class="nav-link">ALERTS</a>
+                <a href="#" class="nav-link">BUSES</a>
+                <a href="#" class="nav-link">FLIGHTS</a>
+                <a href="#" class="nav-link">HOTELS</a>
+                <a href="#" class="nav-link">HOLIDAYS</a>
+                <a href="#" class="nav-link">MEALS</a>
+                <a href="#" class="nav-link">PROMOTIONS</a>
+                <a href="#" class="nav-link">MORE</a>
+                <a href="#" class="nav-link">CONTACT US</a>
+            </div>
+        </div>
+
+        <div class="logo-right">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/IRCTC_Logo.svg/1200px-IRCTC_Logo.svg.png" alt="IRCTC">
+        </div>
+    </nav>
+
+    <!-- Login Portal Section -->
+    <div class="main-container">
+        
+        <div class="login-card">
+            <div class="login-header">
+                <h2>Login</h2>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder=" " required>
+                    <label for="username">User Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                    <i class="fa-solid fa-eye password-toggle" onclick="togglePassword()"></i>
+                </div>
+
+                <div class="extra-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="otpCheck" onchange="toggleOtpMode()">
+                        Booking With OTP
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Account Details?</a>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">Sign In</button>
+
+                <div class="login-footer">
+                    <button type="button" class="btn-secondary">Register</button>
+                    <button type="button" class="btn-secondary">Agent Login</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="banner-card">
+            <div class="circle-decor c1"></div>
+            <div class="circle-decor c2"></div>
+            
+            <div class="banner-content">
+                <div class="banner-icon-container">
+                    <i class="fa-solid fa-bus-simple"></i>
+                </div>
+                <div class="banner-title">IRCTC Bus Booking</div>
+                <div class="banner-subtitle">Making Your Travel Easy & Affordable</div>
+                
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Verified Buses & Private Operators</li>
+                    <li><i class="fa-solid fa-check"></i> Affordable Prices & Wide Network</li>
+                    <li><i class="fa-solid fa-check"></i> Senior Citizen Discount Offers</li>
+                </ul>
+
+                <div style="margin-top: 20px;">
+                    <span style="background: yellow; color: black; padding: 5px 10px; font-weight: bold; border-radius: 4px;">
+                        All in one place
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Format Date: DD-Mon-YYYY
+            const day = String(now.getDate()).padStart(2, '0');
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            // Format Time: [HH:MM:SS]
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const dateString = `${day}-${month}-${year} [${hours}:${minutes}:${seconds}]`;
+            
+            document.getElementById('current-date').innerText = dateString;
+        }
+
+        // Update immediately and then every second
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Login functionality
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function toggleOtpMode() {
+            const otpCheck = document.getElementById('otpCheck');
+            const passwordInput = document.getElementById('password');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (otpCheck.checked) {
+                passwordInput.disabled = true;
+                passwordInput.value = "";
+                passwordInput.placeholder = "Password disabled";
+                passwordInput.style.backgroundColor = "#eee";
+                submitBtn.textContent = "Get OTP";
+                submitBtn.style.backgroundColor = "#213d77"; // Change color to blue for OTP
+            } else {
+                passwordInput.disabled = false;
+                passwordInput.placeholder = " ";
+                passwordInput.style.backgroundColor = "white";
+                submitBtn.textContent = "Sign In";
+                submitBtn.style.backgroundColor = "#fb792b"; // Back to orange
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.textContent;
+            
+            // Simulation of loading state
+            btn.textContent = "Processing...";
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert("Login logic would execute here!");
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
