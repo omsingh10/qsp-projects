@@ -35,6 +35,19 @@ function searchTrains() {
     }
 }
 
+// 4. Modal functionality
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('alertModal').style.display = 'none';
+});
+
+// Close modal if clicking outside the white box
+window.onclick = function(event) {
+    const modal = document.getElementById('alertModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
     updateTime();
