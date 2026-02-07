@@ -1,0 +1,318 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; /* Standard Google Font match */
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo { height: 50px; }
+.logo-sm { height: 40px; }
+
+.nav-center a {
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 10px;
+    padding: 10px 0;
+}
+
+.nav-center a.active {
+    color: #fb792b;
+    border-bottom: 2px solid #fb792b;
+}
+
+/* Layout Container */
+.container {
+    display: flex;
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 0 15px;
+    gap: 20px;
+}
+
+/* Sidebar Filters */
+.sidebar {
+    width: 280px;
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    height: fit-content;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.filter-group:last-child { border: none; }
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 14px;
+    color: #213d77;
+}
+
+.reset-link {
+    font-size: 12px;
+    color: #213d77;
+    text-decoration: none;
+}
+
+.filter-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Checkboxes */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #213d77;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+    left: 5px;
+    top: 1px;
+    width: 3px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Time Grid Buttons */
+.time-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.time-btn {
+    background: #fbfbfb;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.time-btn:hover { background: #eee; }
+
+.time-btn.active {
+    background: #213d77;
+    color: white;
+    border-color: #213d77;
+}
+
+.time-btn i { font-size: 14px; margin-bottom: 4px; }
+.time-btn span { font-size: 10px; font-weight: bold; }
+.time-btn small { font-size: 9px; }
+
+/* Main Content */
+.content {
+    flex: 1;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.sort-options .link {
+    color: #213d77;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Train Card */
+.train-card {
+    background: white;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    background: #f0f4f7;
+    padding: 10px;
+    margin: -15px -15px 15px -15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.train-name h3 {
+    font-size: 16px;
+    color: #213d77;
+    margin-bottom: 4px;
+}
+
+.runs-on {
+    font-size: 12px;
+    color: #666;
+}
+
+.schedule-link {
+    font-size: 12px;
+    color: #213d77;
+    text-decoration: none;
+}
+
+.card-timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    margin-bottom: 20px;
+}
+
+.time-box { text-align: center; }
+.time-box .time { font-size: 18px; font-weight: bold; color: #333; }
+.time-box .station { font-size: 12px; font-weight: bold; color: #666; margin-top: 4px; }
+.time-box .date { font-size: 11px; color: #999; }
+
+.duration-line {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    margin: 0 20px;
+}
+
+.duration-line span { font-size: 12px; color: #666; background: white; padding: 0 5px; position: relative; z-index: 1; }
+.duration-line .line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #ddd;
+    z-index: 0;
+}
+
+/* Classes */
+.classes-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.class-box {
+    min-width: 140px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.class-box.selected {
+    border: 1px solid #fb792b;
+    background: #fff5ed;
+}
+
+.cls-name { font-weight: bold; font-size: 13px; margin-bottom: 5px; color: #333; }
+.cls-status { font-size: 12px; font-weight: 600; }
+.cls-status.refresh { color: #213d77; }
+.cls-status.available { color: #2ecc71; }
+.cls-status.wl { color: #e74c3c; }
+.cls-price { font-size: 14px; font-weight: bold; color: #333; margin-top: 5px; }
+
+/* Action Buttons */
+.action-row {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-book {
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-book.active { background: #fb792b; }
+.btn-book.disabled { background: #e0e0e0; color: #999; cursor: not-allowed; }
+
+.btn-other {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
