@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRCTC Ticket History Redesign</title>
+    <title>IRCTC - Booked Ticket History</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -12,125 +12,252 @@
     <div class="main-container">
         
         <header class="page-header">
-            <h1>Booked Ticket History</h1>
-            <p class="disclaimer">
-                <i class="fa-solid fa-circle-info"></i> 
-                IRCTC never asks for personal banking info like OTP, CVV, or PIN.
+            <h1>BOOKED TICKET HISTORY</h1>
+            <p class="header-info">
+                This page provides complete train ticket booking information, including details like Departure/Arrival, Card number, CIN, ATM PIN, the CVN number, PAN number and lots of information below.
             </p>
         </header>
 
         <div class="tabs">
-            <button class="tab-btn active">All Journeys</button>
-            <button class="tab-btn">Upcoming</button>
-            <button class="tab-btn">Past Journeys</button>
+            <button class="tab-btn active">ALL JOURNEYS</button>
+            <button class="tab-btn">UPCOMING</button>
+            <button class="tab-btn">PAST JOURNEYS</button>
         </div>
 
         <div class="content-wrapper">
             
             <div class="ticket-section">
                 
+                <!-- Ticket 1 -->
                 <div class="ticket-card">
                     
-                    <div class="ticket-header">
-                        <div class="train-info">
-                            <h2>LTT GKP SF EXP (12165)</h2>
-                            <span class="pnr-badge">PNR: 8932335439 <i class="fa-regular fa-copy" onclick="copyPNR()" title="Copy PNR"></i></span>
-                        </div>
-                        <div class="journey-status">
-                            <span class="status-badge success">BOOKED</span>
-                        </div>
+                    <div class="ticket-time-header">
+                        <span class="time-label">08:00 | Lucknowskdn Tj Sf/it</span>
+                        <span class="status-badge blue">Booked Below: Lucknowskdn Tj Sf/it</span>
                     </div>
 
-                    <div class="journey-timeline">
-                        <div class="time-box">
-                            <span class="time">06:00</span>
-                            <span class="station">Lokmanyatilak T (LTT)</span>
-                            <span class="date">Mon, 06 Apr</span>
-                        </div>
-                        <div class="duration-line">
-                            <span class="duration">21h 50m</span>
-                            <div class="line"></div>
-                            <i class="fa-solid fa-train"></i>
-                        </div>
-                        <div class="time-box right">
-                            <span class="time">03:50</span>
-                            <span class="station">Prayagraj Jn. (PRYJ)</span>
-                            <span class="date">Tue, 07 Apr</span>
-                        </div>
+                    <div class="booking-details">
+                        <p><strong>Booking Status:</strong> Booking Below Lucknowskdn Tj Sf/it</p>
                     </div>
-
-                    <div class="meta-info">
-                        <span><i class="fa-solid fa-users"></i> 4 Adult | 0 Child</span>
-                        <span><i class="fa-solid fa-chair"></i> AC 3 Tier (3A) | General</span>
-                        <span><i class="fa-solid fa-building"></i> Boarding: LTT</span>
-                    </div>
-
-                    <hr class="divider">
 
                     <h3 class="section-title">Passenger Information</h3>
-                    <div class="passenger-list">
-                        <div class="passenger-row">
-                            <div class="p-name">
-                                <strong>1. Abdul Hameed</strong>
-                                <small>54 yrs | Male</small>
-                            </div>
-                            <div class="p-status">
-                                <div class="status-item">
-                                    <small>Booking Status</small>
-                                    <span>B2 / 46</span>
-                                </div>
-                                <div class="status-item">
-                                    <small>Current Status</small>
-                                    <span class="cnf">CNF/B2/46/LB</span>
-                                </div>
-                            </div>
-                        </div>
+                    
+                    <div class="passenger-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Current Status</th>
+                                    <th>Seat No.</th>
+                                    <th>Coach & Seat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Rajendra<br><small>PWBLN</small></td>
+                                    <td>64 yrs | Male</td>
+                                    <td>Male</td>
+                                    <td>84A/27 - Available - Vacant</td>
+                                    <td>Upper</td>
+                                    <td>84A/27 PWBLN</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <div class="passenger-row">
-                            <div class="p-name">
-                                <strong>2. Yasmeen</strong>
-                                <small>48 yrs | Female</small>
-                            </div>
-                            <div class="p-status">
-                                <div class="status-item">
-                                    <small>Booking Status</small>
-                                    <span>PQWL/11</span>
-                                </div>
-                                <div class="status-item">
-                                    <small>Current Status</small>
-                                    <span class="wait">PQWL/11</span>
-                                </div>
-                            </div>
+                    <h3 class="section-title">Transaction Details</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="label">Transaction ID</span>
+                            <span class="value">1480505383083807</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Ticket Type</span>
+                            <span class="value">E-Ticket</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Booking ID</span>
+                            <span class="value">08 Feb 2025 | 09:10AM</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Class & Quota</span>
+                            <span class="value">3A AC3 Tier | General</span>
                         </div>
                     </div>
 
-                    <hr class="divider">
-
-                    <div class="ticket-footer">
-                        <div class="detail-group">
-                            <small>Transaction ID</small>
-                            <span>100005352636807</span>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="label">Boarding At</span>
+                            <span class="value">LKO - LUCKNOW</span>
                         </div>
-                        <div class="detail-group">
-                            <small>Total Amount</small>
-                            <span class="amount">₹ 7,662.4</span>
-                        </div>
-                        <div class="actions">
-                            <button class="btn-secondary">Cancel Ticket</button>
-                            <button class="btn-primary">Download Ticket</button>
+                        <div class="detail-item">
+                            <span class="label">Reservation Up To</span>
+                            <span class="value">PUNE - Pune Jn</span>
                         </div>
                     </div>
 
+                    <h3 class="section-title">Travel Insurance Opted: (All 15 IRCTC)</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="label">Insurance</span>
+                            <span class="value">Not taken</span>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title">Ticket Fare</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="label">Total Fare</span>
+                            <span class="value"><strong>₹ 599.00/-</strong></span>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title">PNR & Status Enquiry</h3>
+                    <p class="pnr-text">PNR: <strong>2352353352</strong> | <a href="#">Get Current IRCTC PNR Status Here</a></p>
+
+                    <div class="button-group">
+                        <button class="btn-action">Show More</button>
+                        <button class="btn-action">Update Profile</button>
+                        <button class="btn-action">File TDR</button>
+                        <button class="btn-action">SMS</button>
+                        <button class="btn-action">Email</button>
+                        <button class="btn-action">Send Available Berth</button>
+                        <button class="btn-action">Print Cancellable</button>
+                    </div>
+
+                </div>
+
+                <!-- Ticket 2 -->
+                <div class="ticket-card">
+                    
+                    <div class="ticket-time-header">
+                        <span class="time-label">10.00 | Kanpur Ac Spn</span>
+                        <span class="status-badge green">Confirmed</span>
+                    </div>
+
+                    <div class="booking-details">
+                        <p><strong>Booking Status:</strong> Confirmed</p>
+                    </div>
+
+                    <h3 class="section-title">Passenger Information</h3>
+                    
+                    <div class="passenger-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Current Status</th>
+                                    <th>Seat No.</th>
+                                    <th>Coach & Seat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nikkhil<br><small>PUNE</small></td>
+                                    <td>28 yrs | Male</td>
+                                    <td>Male</td>
+                                    <td>B4/23 - Confirmed - Vacant</td>
+                                    <td>Lower</td>
+                                    <td>B4/23 PUNE</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Ravinder Singh<br><small>PUNE</small></td>
+                                    <td>48 yrs | Male</td>
+                                    <td>Male</td>
+                                    <td>B4/24 - Confirmed - Vacant</td>
+                                    <td>Middle</td>
+                                    <td>B4/24 PUNE</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Neelam Singh<br><small>PUNE</small></td>
+                                    <td>45 yrs | Female</td>
+                                    <td>Female</td>
+                                    <td>B4/25 - Confirmed - Vacant</td>
+                                    <td>Upper</td>
+                                    <td>B4/25 PUNE</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="section-title">Transaction Details</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="label">Transaction ID</span>
+                            <span class="value">1580405383048891</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Ticket Type</span>
+                            <span class="value">E-Ticket</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Booking ID</span>
+                            <span class="value">07 Feb 2025 | 02:45PM</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Class & Quota</span>
+                            <span class="value">2A AC2 Tier | Tatkal</span>
+                        </div>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="label">Boarding At</span>
+                            <span class="value">CNB - KANPUR</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Reservation Up To</span>
+                            <span class="value">PUNE - Pune Jn</span>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title">Ticket Fare</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="label">Total Fare</span>
+                            <span class="value"><strong>₹ 4338.0</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-action">Show More</button>
+                        <button class="btn-action">Update Profile</button>
+                        <button class="btn-action">File TDR</button>
+                        <button class="btn-action">SMS</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <aside class="sidebar">
+                <div class="ad-card">
+                    <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400" alt="Buddha Circuit">
+                    <div class="ad-content">
+                        <h3>Get insights into the legacy of<br>Lord Buddha</h3>
+                        <p class="price">Starting from ₹ 76,905/-</p>
+                        <button class="ad-btn">Book Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
             </div>
 
             <aside class="sidebar">
                 <div class="ad-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Mahabodhi_Temple_Bodh_Gaya.jpg" alt="Lord Buddha Legacy">
+                    <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400" alt="Buddha Circuit">
                     <div class="ad-content">
-                        <h3>Get insights into the legacy of Lord Buddha</h3>
-                        <p>Starting from ₹ 76,905/-</p>
-                        <button class="ad-btn">Book Now</button>
+                        <h3>Get insights into the legacy of<br>Lord Buddha</h3>
+                        <p class="price">Starting from ₹ 76,905/-</p>
+                        <button class="ad-btn">Book Now <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
             </aside>
