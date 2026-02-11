@@ -1,0 +1,648 @@
+/* ===== IRCTC Review Journey Page Styles ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* ===== Top Bar ===== */
+.top-bar {
+    background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    padding: 8px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-bar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.top-left .irctc-logo img,
+.top-right .irctc-logo-right img {
+    height: 45px;
+    background: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+}
+
+.welcome-text {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* ===== Navigation Bar ===== */
+.main-nav {
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.main-nav li {
+    margin: 0 5px;
+}
+
+.main-nav a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.main-nav a:hover {
+    color: #1a237e;
+    background-color: #f8f9fa;
+}
+
+.main-nav a.active-nav {
+    color: #1a237e;
+    border-bottom-color: #1a237e;
+}
+
+.main-nav a.upi-link {
+    color: #4caf50;
+    font-weight: 700;
+}
+
+/* ===== Banner ===== */
+.banner {
+    padding: 10px 20px;
+}
+
+.banner-img img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* ===== Progress Stepper ===== */
+.stepper-container {
+    background: white;
+    padding: 20px;
+    margin: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+}
+
+.step-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    font-size: 18px;
+    background: #e0e0e0;
+    color: #999;
+}
+
+.step.completed .step-icon {
+    background: #4caf50;
+    color: white;
+}
+
+.step.active-step .step-icon {
+    background: #1a237e;
+    color: white;
+}
+
+.step-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+}
+
+.step.completed .step-label,
+.step.active-step .step-label {
+    color: #333;
+}
+
+.step-line {
+    height: 2px;
+    background: #e0e0e0;
+    flex: 1;
+    margin: 0 10px;
+    margin-top: -20px;
+}
+
+.completed-line {
+    background: #4caf50;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.content-left {
+    flex: 2;
+}
+
+.content-right {
+    flex: 1;
+    max-width: 350px;
+}
+
+/* ===== Train Info Card ===== */
+.train-info-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.train-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.train-header h3 {
+    color: #1a237e;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.quota-badge {
+    background: #ff9800;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.journey-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.station {
+    text-align: center;
+    flex: 1;
+}
+
+.station .time {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.station .station-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.station .date {
+    font-size: 12px;
+    color: #999;
+}
+
+.journey-line {
+    flex: 2;
+    padding: 0 30px;
+}
+
+.line-with-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a237e;
+}
+
+.dash-line {
+    height: 2px;
+    background: linear-gradient(to right, #1a237e 50%, transparent 50%);
+    background-size: 8px 2px;
+    flex: 1;
+    margin: 0 8px;
+}
+
+.duration {
+    background: white;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    position: absolute;
+    top: -20px;
+}
+
+.coach-info {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.irctc-notice {
+    font-size: 12px;
+    color: #ff5722;
+    font-style: italic;
+}
+
+/* ===== Passenger Card ===== */
+.passenger-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.card-header h3 {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-header i {
+    color: #666;
+    transition: transform 0.3s;
+}
+
+.passenger-list {
+    padding: 20px;
+}
+
+.passenger-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.passenger-num {
+    background: #1a237e;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.passenger-name {
+    font-weight: 600;
+    color: #333;
+    min-width: 140px;
+}
+
+.passenger-age {
+    font-size: 13px;
+    color: #666;
+}
+
+/* ===== Contact Info ===== */
+.contact-info {
+    background: #e3f2fd;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #1565c0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ===== CAPTCHA Section ===== */
+.captcha-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.captcha-banner {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.captcha-ad img {
+    border-radius: 6px;
+    max-width: 100%;
+    height: auto;
+}
+
+.captcha-box {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.captcha-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: 2px solid #e0e0e0;
+}
+
+.captcha-text {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a237e;
+    text-decoration: line-through;
+    letter-spacing: 2px;
+}
+
+.captcha-refresh {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 4px;
+}
+
+.captcha-refresh:hover {
+    color: #1a237e;
+    transform: rotate(15deg);
+}
+
+.captcha-input {
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    min-width: 140px;
+}
+
+.captcha-input:focus {
+    border-color: #1a237e;
+}
+
+.cancellation-link {
+    text-align: center;
+}
+
+.cancellation-link a {
+    color: #1a237e;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.cancellation-link a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Action Buttons ===== */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-back,
+.btn-continue {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 120px;
+}
+
+.btn-back {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.btn-back:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-continue {
+    background: #1a237e;
+    color: white;
+}
+
+.btn-continue:hover {
+    background: #303f9f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
+}
+
+/* ===== Fare Summary Sidebar ===== */
+.fare-summary-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: sticky;
+    top: 100px;
+}
+
+.fare-header {
+    background: #1a237e;
+    color: white;
+    padding: 16px 20px;
+}
+
+.fare-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.fare-details {
+    padding: 20px;
+}
+
+.fare-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.fare-row:last-child {
+    border-bottom: none;
+}
+
+.fare-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0 10px 0;
+    border-top: 2px solid #1a237e;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a237e;
+}
+
+.pm-banner {
+    padding: 20px;
+    text-align: center;
+}
+
+.pm-banner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .content-right {
+        max-width: 100%;
+    }
+    
+    .journey-details {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .journey-line {
+        order: -1;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .line-with-arrow {
+        transform: rotate(90deg);
+        height: 60px;
+    }
+    
+    .duration {
+        transform: rotate(-90deg);
+        position: static;
+        margin: 10px 0;
+    }
+    
+    .captcha-box {
+        flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 0 10px;
+    }
+    
+    .main-nav a {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-bar-inner {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .welcome-text {
+        font-size: 11px;
+    }
+    
+    .stepper {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .step-line {
+        display: none;
+    }
+}

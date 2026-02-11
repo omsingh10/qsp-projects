@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Ticket History Redesign</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <header class="page-header">
+            <h1>Booked Ticket History</h1>
+            <p class="disclaimer">
+                <i class="fa-solid fa-circle-info"></i> 
+                IRCTC never asks for personal banking info like OTP, CVV, or PIN.
+            </p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active">All Journeys</button>
+            <button class="tab-btn">Upcoming</button>
+            <button class="tab-btn">Past Journeys</button>
+        </div>
+
+        <div class="content-wrapper">
+            
+            <div class="ticket-section">
+                
+                <div class="ticket-card">
+                    
+                    <div class="ticket-header">
+                        <div class="train-info">
+                            <h2>LTT GKP SF EXP (12165)</h2>
+                            <span class="pnr-badge">PNR: 8932335439 <i class="fa-regular fa-copy" onclick="copyPNR()" title="Copy PNR"></i></span>
+                        </div>
+                        <div class="journey-status">
+                            <span class="status-badge success">BOOKED</span>
+                        </div>
+                    </div>
+
+                    <div class="journey-timeline">
+                        <div class="time-box">
+                            <span class="time">06:00</span>
+                            <span class="station">Lokmanyatilak T (LTT)</span>
+                            <span class="date">Mon, 06 Apr</span>
+                        </div>
+                        <div class="duration-line">
+                            <span class="duration">21h 50m</span>
+                            <div class="line"></div>
+                            <i class="fa-solid fa-train"></i>
+                        </div>
+                        <div class="time-box right">
+                            <span class="time">03:50</span>
+                            <span class="station">Prayagraj Jn. (PRYJ)</span>
+                            <span class="date">Tue, 07 Apr</span>
+                        </div>
+                    </div>
+
+                    <div class="meta-info">
+                        <span><i class="fa-solid fa-users"></i> 4 Adult | 0 Child</span>
+                        <span><i class="fa-solid fa-chair"></i> AC 3 Tier (3A) | General</span>
+                        <span><i class="fa-solid fa-building"></i> Boarding: LTT</span>
+                    </div>
+
+                    <hr class="divider">
+
+                    <h3 class="section-title">Passenger Information</h3>
+                    <div class="passenger-list">
+                        <div class="passenger-row">
+                            <div class="p-name">
+                                <strong>1. Abdul Hameed</strong>
+                                <small>54 yrs | Male</small>
+                            </div>
+                            <div class="p-status">
+                                <div class="status-item">
+                                    <small>Booking Status</small>
+                                    <span>B2 / 46</span>
+                                </div>
+                                <div class="status-item">
+                                    <small>Current Status</small>
+                                    <span class="cnf">CNF/B2/46/LB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="passenger-row">
+                            <div class="p-name">
+                                <strong>2. Yasmeen</strong>
+                                <small>48 yrs | Female</small>
+                            </div>
+                            <div class="p-status">
+                                <div class="status-item">
+                                    <small>Booking Status</small>
+                                    <span>PQWL/11</span>
+                                </div>
+                                <div class="status-item">
+                                    <small>Current Status</small>
+                                    <span class="wait">PQWL/11</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="ticket-footer">
+                        <div class="detail-group">
+                            <small>Transaction ID</small>
+                            <span>100005352636807</span>
+                        </div>
+                        <div class="detail-group">
+                            <small>Total Amount</small>
+                            <span class="amount">₹ 7,662.4</span>
+                        </div>
+                        <div class="actions">
+                            <button class="btn-secondary">Cancel Ticket</button>
+                            <button class="btn-primary">Download Ticket</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="ad-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Mahabodhi_Temple_Bodh_Gaya.jpg" alt="Lord Buddha Legacy">
+                    <div class="ad-content">
+                        <h3>Get insights into the legacy of Lord Buddha</h3>
+                        <p>Starting from ₹ 76,905/-</p>
+                        <button class="ad-btn">Book Now</button>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
