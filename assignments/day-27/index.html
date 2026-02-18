@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC eCatering | Food on Track</title>
+    <style>
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Header / Navbar --- */
+        header {
+            background-color: #fff;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-logos img {
+            height: 40px; /* Adjust based on actual logo aspect ratios */
+            margin-right: 10px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .header-right a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .header-right i { color: #fb792b; }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 500px;
+            background-image: url('https://neon.ipsator.com/cloudinary/upload/c_scale,w_420/v1697637343/irctc/app-download.webp'); /* Fallback/Placeholder if main bg isn't exact */
+            background-color: #eee; /* Placeholder color */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Overlay to darken background for text readability if needed */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* --- Search Box Area --- */
+        .search-container {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-input-group {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 4px;
+            display: flex;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .search-input-group i {
+            padding: 15px;
+            color: #888;
+        }
+
+        .search-input-group input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        .pnr-group {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .pnr-group input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        .pnr-group button {
+            background-color: #fb792b;
+            color: white;
+            border: none;
+            padding: 0 30px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .pnr-group button:hover {
+            background-color: #e66012;
+        }
+
+        /* --- Banners / Info Strip --- */
+        .info-strip {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px 5%;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+        }
+        
+        .info-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 45%;
+            min-width: 300px;
+        }
+
+        .info-box img {
+            height: 50px;
+        }
+        
+        .group-order-box {
+             justify-content: space-between;
+        }
+
+        .group-btn {
+            border: 1px solid #fb792b;
+            color: #fb792b;
+            padding: 8px 15px;
+            border-radius: 4px;
+            background: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- How It Works --- */
+        .how-it-works {
+            text-align: center;
+            padding: 50px 5%;
+            background: #fff;
+        }
+
+        .how-it-works h2 {
+            margin-bottom: 40px;
+            color: #444;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            max-width: 250px;
+        }
+
+        .step-icon {
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .step-tag {
+            background: #fb792b;
+            color: #fff;
+            display: inline-block;
+            padding: 2px 10px;
+            transform: skew(-15deg);
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .step-tag span {
+            display: inline-block;
+            transform: skew(15deg); /* Un-skew text */
+        }
+
+        .step p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* --- Partners Section --- */
+        .partners {
+            text-align: center;
+            padding: 50px 5%;
+            background: #f9f9f9;
+        }
+
+        .partners h2 {
+            margin-bottom: 30px;
+            color: #444;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .partner-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .partner-card img {
+            max-width: 100%;
+            max-height: 50px;
+            object-fit: contain;
+        }
+
+        /* --- Vendor Banner --- */
+        .vendor-banner {
+            background: linear-gradient(90deg, #f15a22 0%, #faa61a 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 10%;
+            margin: 40px 5%;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vendor-text h2 { margin-bottom: 10px; }
+        .vendor-text button {
+            margin-top: 15px;
+            background: #fff;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .vendor-img {
+            height: 150px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #212a41; /* Dark Navy */
+            color: #fff;
+            padding: 50px 5% 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col {
+            margin-bottom: 20px;
+            min-width: 200px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #ccc;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #fff;
+        }
+
+        .app-links img {
+            height: 35px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #eee;
+            border-radius: 50%;
+            color: #333;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/IRCTC_Logo.svg/1200px-IRCTC_Logo.svg.png" alt="IRCTC">
+                 </div>
+        </div>
+        <div class="header-right">
+            <a href="#"><i class="fas fa-mobile-alt"></i> Download App</a>
+            <a href="#"><i class="fas fa-users"></i> Group Orders</a>
+            <a href="#"><i class="fas fa-user"></i> Account</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Food delivery for your train journeys</h1>
+            
+            <div class="search-container">
+                <div class="search-input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search food, brand, station, etc.">
+                </div>
+
+                <div class="pnr-group">
+                    <span style="padding: 15px; color: #888;"><i class="fas fa-train"></i></span>
+                    <input type="text" placeholder="Enter PNR to order">
+                    <button>SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-strip">
+        <div class="info-box">
+             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/IRCTC_Logo.svg/1200px-IRCTC_Logo.svg.png" alt="IRCTC">
+             <div>
+                 <strong>Official website of Indian Railways</strong><br>
+                 and IRCTC to order food on trains
+             </div>
+        </div>
+        <div class="info-box group-order-box">
+            <div>
+                <strong><i class="fas fa-users"></i> Group Orders</strong><br>
+                <small>Ordering for a group of more than 15 people? Get custom prices.</small>
+            </div>
+            <button class="group-btn">GROUP BOOKING</button>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How it works</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-store fa-3x" style="color:#555"></i></div>
+                <div class="step-tag"><span>1</span> Choose an outlet</div>
+                <p>Enter PNR & explore restaurants for your journey</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-list-check fa-3x" style="color:#555"></i></div>
+                <div class="step-tag"><span>2</span> Complete Order</div>
+                <p>Choose your food & schedule your order paying online or COD</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-utensils fa-3x" style="color:#555"></i></div>
+                <div class="step-tag"><span>3</span> Enjoy Tasty Food</div>
+                <p>Enjoy your meal delivered to you right at your seat</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners">
+        <h2>Our authorised partners</h2>
+        <div class="logo-grid">
+            <div class="partner-card"><img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Dominos_pizza_logo.svg" alt="Dominos"></div>
+            <div class="partner-card"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg" alt="Zomato"></div>
+            <div class="partner-card"><img src="https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg" alt="Swiggy"></div>
+            <div class="partner-card"><strong>Behrouz</strong></div>
+            <div class="partner-card"><strong>Faasos</strong></div>
+            <div class="partner-card"><strong>RailRestro</strong></div>
+            <div class="partner-card"><strong>Zoop</strong></div>
+            <div class="partner-card"><strong>Relfood</strong></div>
+        </div>
+    </section>
+
+    <section class="vendor-banner">
+        <div class="vendor-text">
+            <h2>Are you a restaurant owner? Register as a vendor</h2>
+            <p>We are always looking to partner with reputed and quality restaurants</p>
+            <button>REGISTER NOW</button>
+        </div>
+        <img src="https://neon.ipsator.com/c/image/upload/q_90/v1633022433/irctc/images/sampleVendorRegf.webp" alt="Vendor" class="vendor-img">
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>IRCTC eCatering</h4>
+                <p>Food delivery for your train journeys.</p>
+                <div class="app-links">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store">
+                </div>
+                <div class="social-links">
+                    <span><i class="fab fa-facebook-f"></i></span>
+                    <span><i class="fab fa-twitter"></i></span>
+                    <span><i class="fab fa-instagram"></i></span>
+                    <span><i class="fab fa-youtube"></i></span>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>IRCTC</h4>
+                <ul>
+                    <li><a href="#">E-Ticketing</a></li>
+                    <li><a href="#">Register as a vendor</a></li>
+                    <li><a href="#">Policy for B2C Agents</a></li>
+                    <li><a href="#">Verify Delivery ID Card</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Frequently Asked Questions</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Train Friendly Dishes</a></li>
+                    <li><a href="#">Order Jain Food in Train</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © 2026 - www.ecatering.irctc.co.in. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC eCatering | Food on Track</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- Reset & Base Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: #f9f9f9; color: #333; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* --- Header --- */
+        header {
+            background-color: #fff;
+            height: 70px;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-logos img { height: 45px; margin-right: 15px; }
+        .header-right { display: flex; gap: 25px; font-size: 14px; font-weight: 600; color: #444; }
+        .header-right a { display: flex; align-items: center; gap: 8px; }
+        .header-right i { color: #fb792b; font-size: 16px; }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            /* IMPORTANT: Replace this URL with your local file 'image_c8a9e5.jpg' */
+            background-image: url('https://neon.ipsator.com/cloudinary/upload/c_scale,w_420/v1697637343/irctc/app-download.webp'); 
+            background-size: cover;
+            background-position: center;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Dark overlay for better text contrast */
+        .hero::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); z-index: 1;
+        }
+
+        .hero-content { position: relative; z-index: 2; width: 100%; max-width: 700px; }
+
+        /* The small logo badge above text */
+        .hero-badge {
+            background: #fff;
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .hero-badge img { width: 50px; }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* --- Search Bars --- */
+        .search-container { display: flex; flex-direction: column; gap: 15px; width: 100%; padding: 0 20px; }
+
+        .input-box {
+            background: #fff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            height: 55px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .input-box i { padding: 0 20px; color: #999; font-size: 1.1rem; }
+        .input-box input {
+            flex: 1; border: none; outline: none; font-size: 1rem; color: #555; height: 100%;
+        }
+
+        .submit-btn {
+            background-color: #fb792b;
+            color: white;
+            border: none;
+            height: 40px;
+            margin-right: 8px;
+            padding: 0 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .submit-btn:hover { background-color: #e66012; }
+
+        /* --- Info Strip (The Two White Banners) --- */
+        .info-strip {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px; /* Overlap hero slightly? No, keeping it clean below */
+            padding: 20px 5%;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            height: 120px;
+            width: 550px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden; /* Clips the train image */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Left Card Styling */
+        .card-logo { height: 60px; margin-right: 20px; }
+        .card-text { flex: 1; z-index: 2; }
+        .card-text h3 { font-size: 1.1rem; color: #212a41; margin-bottom: 5px; }
+        .card-text p { font-size: 0.85rem; color: #666; line-height: 1.4; }
+        
+        .train-img {
+            height: 140px; /* Larger than box to look dynamic */
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            z-index: 1;
+        }
+
+        /* Right Card Styling */
+        .food-bowl-img {
+            height: 120px;
+            margin-left: -20px; /* Pull to edge */
+            margin-right: 15px;
+        }
+        
+        .group-btn {
+            border: 1px solid #fb792b;
+            color: #fb792b;
+            background: transparent;
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .group-btn:hover { background: #fb792b; color: #fff; }
+
+        /* --- Partners Section --- */
+        .partners { text-align: center; padding: 60px 5%; }
+        .partners h2 { margin-bottom: 40px; color: #333; font-weight: 500; }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .partner-img { max-width: 100%; height: auto; filter: grayscale(100%); opacity: 0.7; transition: 0.3s; }
+        .partner-img:hover { filter: grayscale(0); opacity: 1; }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .info-strip { flex-direction: column; align-items: center; }
+            .info-card { width: 100%; height: auto; padding: 20px; }
+            .train-img { height: 80px; position: relative; right: 0; bottom: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/IRCTC_Logo.svg/1200px-IRCTC_Logo.svg.png" alt="IRCTC">
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="#"><i class="fas fa-mobile-alt"></i> Download App</a>
+            <a href="#"><i class="fas fa-users"></i> Group Orders</a>
+            <a href="#"><i class="fas fa-user"></i> Account</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/IRCTC_Logo.svg/1200px-IRCTC_Logo.svg.png" alt="Logo">
+            </div>
+
+            <h1>Food delivery for your train journeys</h1>
+            
+            <div class="search-container">
+                <div class="input-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search food, brand, station, etc.">
+                </div>
+
+                <div class="input-box">
+                    <i class="fas fa-train"></i>
+                    <input type="text" placeholder="Enter PNR to order">
+                    <button class="submit-btn">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-strip">
+        <div class="info-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/IRCTC_Logo.svg/1200px-IRCTC_Logo.svg.png" class="card-logo" alt="IRCTC">
+            <div class="card-text">
+                <h3>Official website of Indian Railways</h3>
+                <p>and IRCTC to order food on trains</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/325/325607.png" class="train-img" alt="Train">
+        </div>
+
+        <div class="info-card">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="food-bowl-img" alt="Food">
+            <div class="card-text">
+                <h3>Group Orders</h3>
+                <p>Ordering for a group of more than 15 people? Get custom prices.</p>
+            </div>
+            <button class="group-btn">GROUP BOOKING</button>
+        </div>
+    </section>
+
+    <section class="partners">
+        <h2>Our authorised partners</h2>
+        <div class="logo-grid">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Dominos_pizza_logo.svg" class="partner-img" alt="Dominos" style="height: 40px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg" class="partner-img" alt="Zomato" style="height: 30px;">
+            <img src="https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg" class="partner-img" alt="Swiggy" style="height: 40px;">
+            </div>
+    </section>
+
+</body>
+</html>
+background-image: url('image_c8a9e5.jpg');
